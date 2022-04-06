@@ -69,11 +69,13 @@ public class GameManager : MonoBehaviour
 
         if (shuffledScenarioList[currentScenario].Item2 == scenarioName[0])
         {
-            playerAmbulance.transform.position = startingLocationBridge.transform.position; //TODO: if time, make generic instead of serializable fields
+            playerAmbulance.transform.rotation = startingLocationMountain.transform.rotation;
+            playerAmbulance.transform.position = startingLocationMountain.transform.position;
         }
         else
         {
-            playerAmbulance.transform.position = startingLocationMountain.transform.position;
+            playerAmbulance.transform.rotation = startingLocationBridge.transform.rotation;
+            playerAmbulance.transform.position = startingLocationBridge.transform.position; //TODO: if time, make generic instead of serializable fields
         } 
     }
 
