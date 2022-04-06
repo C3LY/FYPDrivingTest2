@@ -10,8 +10,11 @@ public class RaycastRoad : MonoBehaviour
     [SerializeField] private int vectorY = -1;
     [SerializeField] private int vectorZ =  10;
     [SerializeField] private float threshold = 0.01f;
+    [SerializeField] private int sweepDistance = 10;
+    [SerializeField] private bool showGizmos = false;
+    private Vector3 gizmoHitPoint = new Vector3();
 
-    private Vector3 hitPoint = new Vector3();
+    public float distanceFromEdge = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,26 +26,31 @@ public class RaycastRoad : MonoBehaviour
     {
         RaycastHit hitDownOpposite;
         RaycastHit hitHypotenuse;
-        
-        Physics.Raycast(transform.position, transform.TransformDirection(Vector3.down), out hitDownOpposite, 10);
-        if (Physics.Raycast(transform.position, transform.TransformDirection(vectorX, vectorY, vectorZ), out hitHypotenuse, 10))
-        {
-            Debug.DrawRay(transform.position, transform.TransformDirection(vectorX, vectorY, vectorZ) * hitHypotenuse.distance, Color.yellow);
-//            Debug.Log("Collider: " + transform.name + "Collided with: " + hitHypotenuse.collider.name + "hit distance: " + hitHypotenuse.distance);
-        }
 
-        // as it is coming from a vector, it this all redundant?
-  //      double hitAdjacentLength = Math.Sqrt((hitHypotenuse.distance * hitHypotenuse.distance) - (0.5*0.5)); // find adjacent length using basic trig
-      //  print("hit  adjacent distance " + hitAdjacentLength);
-      //  print(hitDownOpposite.distance);
-      
-//      if(hitDownOpposite.collider.CompareTag("Road"))
-//      {
-//          if (hitHypotenuse.collider.CompareTag("Terrain"))
-//          {
-              binarySearch();
-         // }
-     // }
+        if(Physics.Raycast(transform.position, transform.TransformDirection(Vector3.down), out hitDownOpposite, sweepDistance))
+        {
+            if (Physics.Raycast(transform.position, transform.TransformDirection(vectorX, vectorY, vectorZ),
+                out hitHypotenuse, sweepDistance))
+            {
+                if (showGizmos)
+                {
+                    Debug.DrawRay(transform.position,
+                        transform.TransformDirection(vectorX, vectorY, vectorZ) * hitHypotenuse.distance, Color.yellow);
+                }
+
+                if (hitDownOpposite.collider.CompareTag("Terrain") && hitHypotenuse.collider.CompareTag("Terrain"))
+                {
+//                    print("on terrain");
+                }
+                else
+                {
+                    float distanceZ = binarySearch();
+                    distanceFromEdge = Mathf.Sqrt((distanceZ*distanceZ)-(hitDownOpposite.distance*hitDownOpposite.distance));
+                }
+            }
+
+        }
+    
     }
 
 
@@ -53,24 +61,14 @@ public class RaycastRoad : MonoBehaviour
         float tempVectorZ = (float)vectorZ;
         float leftPointer = 0;
         float middle = Mathf.Round((leftPointer + (tempVectorZ - leftPointer) / 2) * 100.0f) * 0.01f;
-    //    print("middle total: " + Mathf.Round((leftPointer + (tempVectorZ - leftPointer) / 2) * 100.0f)*0.01f);
-     //   print("before while leftPointer: " + leftPointer + "middle: " + middle + "tempVector: " + tempVectorZ);
         while (loopCounter< maxLoop && Mathf.Abs(leftPointer - tempVectorZ) >= threshold)
         {
             loopCounter++;
-           print("in whillle loop  leftPointer: " + leftPointer + "middle: " + middle + "tempVector: " + tempVectorZ);
             RaycastHit hit;
             middle = (leftPointer + (tempVectorZ - leftPointer) / 2);
-            if (Physics.Raycast(transform.position, transform.TransformDirection(0, -1, middle), out hit, 10))
+            if (Physics.Raycast(transform.position, transform.TransformDirection(0, -1, middle), out hit, sweepDistance))
             {
-                hitPoint = hit.point;
-               print("collider hit" + hit.collider.name);
-//            if (isEdge(middle))
-//            {
-//                print("HAVE FOUND IT!: " + middle);
-//                return middle;
-//            }
-
+                gizmoHitPoint = hit.point;
                 if (hit.collider.transform.CompareTag("Road"))
                 {
                     leftPointer = (float)(middle);
@@ -100,16 +98,21 @@ public class RaycastRoad : MonoBehaviour
         {
             Debug.LogWarning("WARNING - loop breached");
         }
-        Debug.DrawRay(transform.position, transform.transform.TransformDirection(0, -1, middle)* 10, Color.green);
-        return middle; // change to correct
+
+        if(showGizmos)
+        {
+            Debug.DrawRay(transform.position, transform.transform.TransformDirection(0, -1, middle) * sweepDistance, Color.green);
+        }
+        return middle;
     }
 
+    //testing function
     private bool isEdge(float vectorZToLookAt)
     {
         RaycastHit hit;
-        Physics.Raycast(transform.position, transform.TransformDirection(0,-1,vectorZToLookAt), out hit, 10);
+        Physics.Raycast(transform.position, transform.TransformDirection(0,-1,vectorZToLookAt), out hit, sweepDistance);
         RaycastHit hitPlus;
-        Physics.Raycast(transform.position, transform.TransformDirection(0,-1,(float)(vectorZToLookAt +0.2)), out hitPlus, 10);
+        Physics.Raycast(transform.position, transform.TransformDirection(0,-1,(float)(vectorZToLookAt +0.2)), out hitPlus, sweepDistance);
         if (hit.collider.transform.CompareTag("Road"))
         {
             if(hitPlus.collider.transform.CompareTag("Terrain")){
@@ -123,6 +126,9 @@ public class RaycastRoad : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        Gizmos.DrawSphere(hitPoint,0.5f);
+
+        if(showGizmos){
+            Gizmos.DrawSphere(gizmoHitPoint, 0.5f);
+        }
     }
 }
