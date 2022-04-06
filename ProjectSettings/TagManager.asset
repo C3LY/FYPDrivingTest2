@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Terrain
   - Road
+  - Scenario
+  - Vehicle
+  - ScenarioList
   layers:
   - Default
   - TransparentFX

@@ -12,13 +12,10 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/Assets/RaycastRoad.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/CarController.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/CamFollow.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/RotateToCamera.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/SimpleCarController.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/ChangeScenario.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/BoundsDistance.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/ScenarioBreakTrigger.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/ChangeScenario.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/playBridgeAnimation.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/GameManager.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -34,6 +31,10 @@
         <option value="$PROJECT_DIR$/Assets/RayCastRoad2.cs" />
         <option value="$PROJECT_DIR$/Assets/BoundsDistance.cs" />
         <option value="$PROJECT_DIR$/Assets/RaycastRoad.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/ChangeScenario.cs" />
+        <option value="$PROJECT_DIR$/Assets/playBridgeAnimation.cs" />
+        <option value="$PROJECT_DIR$/Assets/ScenarioBreakTrigger.cs" />
+        <option value="$PROJECT_DIR$/Assets/GameManager.cs" />
       </list>
     </option>
   </component>
@@ -44,6 +45,7 @@
     <property name="Rider.DefaultBreakpoints.AreToggled" value="true" />
     <property name="Rider.ProjectViewActivator.IsNotFirstRun" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="settings.editor.selected.configurable" value="CodeLensConfigurable" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -92,7 +94,7 @@
       <workItem from="1649029871936" duration="2421000" />
       <workItem from="1649151219629" duration="77000" />
       <workItem from="1649151314608" duration="343000" />
-      <workItem from="1649151683271" duration="25766000" />
+      <workItem from="1649151683271" duration="35532000" />
     </task>
     <servers />
   </component>
