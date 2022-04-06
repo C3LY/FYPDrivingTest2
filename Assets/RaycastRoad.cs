@@ -2,15 +2,16 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Timeline;
 
 public class RaycastRoad : MonoBehaviour
 {
-    public int vectorX;
-    public int vectorY ;
-    public int vectorZ;
+    [SerializeField] private int vectorX;
+    [SerializeField] private int vectorY = -1;
+    [SerializeField] private int vectorZ =  10;
+    [SerializeField] private float threshold = 0.01f;
 
-    public Collider roadCollider;
-    
+    private Vector3 hitPoint = new Vector3();
     // Start is called before the first frame update
     void Start()
     {
@@ -31,41 +32,76 @@ public class RaycastRoad : MonoBehaviour
         }
 
         // as it is coming from a vector, it this all redundant?
-        double hitAdjacentLength = Math.Sqrt((hitHypotenuse.distance * hitHypotenuse.distance) - (0.5*0.5)); // find adjacent length using basic trig
-        print("hit  adjacent distance " + hitAdjacentLength);
-        print(hitDownOpposite.distance);
-
-        isEdge(vectorZ);
+  //      double hitAdjacentLength = Math.Sqrt((hitHypotenuse.distance * hitHypotenuse.distance) - (0.5*0.5)); // find adjacent length using basic trig
+      //  print("hit  adjacent distance " + hitAdjacentLength);
+      //  print(hitDownOpposite.distance);
+      
+//      if(hitDownOpposite.collider.CompareTag("Road"))
+//      {
+//          if (hitHypotenuse.collider.CompareTag("Terrain"))
+//          {
+              binarySearch();
+         // }
+     // }
     }
 
 
     private float binarySearch()
     {
+        int maxLoop = 50;
+        int loopCounter = 0;
         float tempVectorZ = (float)vectorZ;
         float leftPointer = 0;
-        while (leftPointer <= tempVectorZ)
+        float middle = Mathf.Round((leftPointer + (tempVectorZ - leftPointer) / 2) * 100.0f) * 0.01f;
+    //    print("middle total: " + Mathf.Round((leftPointer + (tempVectorZ - leftPointer) / 2) * 100.0f)*0.01f);
+     //   print("before while leftPointer: " + leftPointer + "middle: " + middle + "tempVector: " + tempVectorZ);
+        while (loopCounter< maxLoop && Mathf.Abs(leftPointer - tempVectorZ) >= threshold)
         {
-            float middle = (float)(leftPointer + (tempVectorZ - leftPointer) / 2);
+            loopCounter++;
+           print("in whillle loop  leftPointer: " + leftPointer + "middle: " + middle + "tempVector: " + tempVectorZ);
             RaycastHit hit;
-            Physics.Raycast(transform.position, transform.TransformDirection(0, -1, middle), out hit, 10);
-            
-            if (isEdge(middle))
+            middle = (leftPointer + (tempVectorZ - leftPointer) / 2);
+            if (Physics.Raycast(transform.position, transform.TransformDirection(0, -1, middle), out hit, 10))
             {
-                return middle;
+                hitPoint = hit.point;
+               print("collider hit" + hit.collider.name);
+//            if (isEdge(middle))
+//            {
+//                print("HAVE FOUND IT!: " + middle);
+//                return middle;
+//            }
+
+                if (hit.collider.transform.CompareTag("Road"))
+                {
+                    leftPointer = (float)(middle);
+                }
+            
+                else if (hit.collider.transform.CompareTag("Terrain"))
+                {
+                    tempVectorZ = (float)(middle);
+                }
+                else
+                {
+                    print("bail - no tag");
+                    return Mathf.Infinity;
+                }
             }
 
-            if (hit.collider.name == roadCollider.name)
+            else
             {
-                leftPointer = (float)(middle + 0.2);
+                print("bail - no raycast");
+                return Mathf.Infinity;
+                
             }
             
-            if (hit.collider.name == "terrain")
-            {
-                leftPointer = (float)(middle - 0.2);
-            }
         }
 
-        return 0f; // change to correct
+        if (loopCounter>=maxLoop)
+        {
+            Debug.LogWarning("WARNING - loop breached");
+        }
+        Debug.DrawRay(transform.position, transform.transform.TransformDirection(0, -1, middle)* 10, Color.green);
+        return middle; // change to correct
     }
 
     private bool isEdge(float vectorZToLookAt)
@@ -74,17 +110,19 @@ public class RaycastRoad : MonoBehaviour
         Physics.Raycast(transform.position, transform.TransformDirection(0,-1,vectorZToLookAt), out hit, 10);
         RaycastHit hitPlus;
         Physics.Raycast(transform.position, transform.TransformDirection(0,-1,(float)(vectorZToLookAt +0.2)), out hitPlus, 10);
-        if (hit.collider.name == roadCollider.name && hitPlus.collider.name == "terrain")
+        if (hit.collider.transform.CompareTag("Road"))
         {
-            print("this is  the  edge");
-            Gizmos.color = Color.magenta;
-            Gizmos.DrawSphere(hit.point, (float)0.2);
-            return true;
+            if(hitPlus.collider.transform.CompareTag("Terrain")){
+                print("this is  the  edge");
+                return true;
+            }
         }
-        else
-        {
-            print("the point looked at " + vectorZToLookAt + "is not the edge");
+        //   print("the point looked at " + vectorZToLookAt + "is not the edge" + "hitCollider" + hit.collider.name);
             return false;
-        }
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawSphere(hitPoint,0.5f);
     }
 }
