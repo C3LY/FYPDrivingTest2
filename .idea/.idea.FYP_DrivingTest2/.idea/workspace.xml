@@ -12,11 +12,16 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/Assets/CloseToEdgeWarning.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/ScenarioBreakTrigger.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/ArchHit.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/GameManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/RaycastRoad.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/ChangeScenario.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/playBridgeAnimation.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/RaycastDummy.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/RaycastFront.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/HitLog.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/triggerActive.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -34,9 +39,17 @@
         <option value="$PROJECT_DIR$/Assets/RaycastRoad.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/ChangeScenario.cs" />
         <option value="$PROJECT_DIR$/Assets/playBridgeAnimation.cs" />
-        <option value="$PROJECT_DIR$/Assets/ScenarioBreakTrigger.cs" />
         <option value="$PROJECT_DIR$/Assets/TransformClip.cs" />
+        <option value="$PROJECT_DIR$/Assets/RaycastFront.cs" />
+        <option value="$PROJECT_DIR$/Assets/BoulardHit.cs" />
+        <option value="$PROJECT_DIR$/Assets/HitLog.cs" />
+        <option value="$PROJECT_DIR$/Assets/ArchHit.cs" />
+        <option value="$PROJECT_DIR$/Assets/ScenarioBreakTrigger.cs" />
         <option value="$PROJECT_DIR$/Assets/GameManager.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/RaycastRoad.cs" />
+        <option value="$PROJECT_DIR$/Assets/RaycastDummy.cs" />
+        <option value="$PROJECT_DIR$/Assets/CloseToEdgeWarning.cs" />
+        <option value="$PROJECT_DIR$/Assets/triggerActive.cs" />
       </list>
     </option>
   </component>
@@ -98,7 +111,8 @@
       <workItem from="1649151314608" duration="343000" />
       <workItem from="1649151683271" duration="36895000" />
       <workItem from="1649266861488" duration="15000" />
-      <workItem from="1649268168158" duration="504000" />
+      <workItem from="1649268168158" duration="4454000" />
+      <workItem from="1649292896991" duration="8458000" />
     </task>
     <servers />
   </component>

@@ -2,12 +2,16 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.Services.Analytics;
+using Unity.Services.Core;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
 using Random = System.Random;
 
+
 public class GameManager : MonoBehaviour
 {
+    private string filename;
     [SerializeField] private GameObject startingLocationBridge;
     [SerializeField] private GameObject startingLocationMountain;
     [SerializeField] private GameObject playerAmbulance;
@@ -30,10 +34,30 @@ public class GameManager : MonoBehaviour
             return _instance;
         }
     }
+    // once Unity analytics is working
+//    async void Start()
+//    {
+//        await UnityServices.InitializeAsync();
+//        Events.CheckForRequiredConsents();
+//
+//    }
 
+    private void setUpLogFile()
+    {
+        string d = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Desktop);
+        d = d + "/DrivingSimulationLOGS";
+ 
+        System.IO.Directory.CreateDirectory(d);
+// that command means "create if not already there, otherwise leave it alone"
+
+        filename= d + "/log" + DateTime.Now.Day + "D" + DateTime.Now.Month + "M" + DateTime.Now.Year + "Y" + DateTime.Now.Hour + "H" + DateTime.Now.Minute + "M" + ".txt";
+        print(filename);
+    }
     private void Awake()
     {
         _instance = this;
+        setUpLogFile();
+        logToTextFile("----" + "Start" + "----");
         foreach (var obj in GameObject.FindGameObjectsWithTag("ScenarioList"))
         {
             scenarioName.Add(obj.name);
@@ -43,12 +67,13 @@ public class GameManager : MonoBehaviour
                 scenarioList.Add(new Tuple<GameObject,string>(child.gameObject,obj.name));
             }
         }
-        string fullList = "shuffled list : " ;
+        string fullList = " Shuffled list order : " ;
         shuffledScenarioList = scenarioList.OrderBy(a => rng.Next()).ToList();
         foreach( var x in shuffledScenarioList) {
             fullList += x.ToString() + " ";
         }
         print(fullList);
+        logToTextFile(fullList);
     }
     
     private void Start()
@@ -59,7 +84,7 @@ public class GameManager : MonoBehaviour
 
     private void setUpScenario()
     {
-        print("current scenario: " + currentScenario + " -> " + shuffledScenarioList[currentScenario].Item1.name);
+        logToTextFileScenario(" Next scenario:  " + currentScenario);
         foreach (Tuple<GameObject, string> obj in scenarioList)
         {
             obj.Item1.SetActive(false);
@@ -71,11 +96,13 @@ public class GameManager : MonoBehaviour
         {
             playerAmbulance.transform.rotation = startingLocationMountain.transform.rotation;
             playerAmbulance.transform.position = startingLocationMountain.transform.position;
+            playerAmbulance.GetComponent<Rigidbody>().velocity = new Vector3(0,0,0);
         }
         else
         {
             playerAmbulance.transform.rotation = startingLocationBridge.transform.rotation;
             playerAmbulance.transform.position = startingLocationBridge.transform.position; //TODO: if time, make generic instead of serializable fields
+            playerAmbulance.GetComponent<Rigidbody>().velocity = new Vector3(0,0,0);
         } 
     }
 
@@ -106,4 +133,23 @@ public class GameManager : MonoBehaviour
             switchToNextScenario();
         }
     }
+
+    public void logToTextFile(string lineOfText)
+    {
+        try {
+            System.IO.File.AppendAllText(filename, DateTime.Now + lineOfText + "\n");
+        }
+        catch {
+            print("could not append");
+        }
+    }
+    
+    public void logToTextFileScenario(string lineOfText)
+    {
+        logToTextFile(
+                    "  " + shuffledScenarioList[currentScenario].Item2 + " | " +
+                    shuffledScenarioList[currentScenario].Item1.name + " | " + lineOfText);
+
+    }
+    
 }

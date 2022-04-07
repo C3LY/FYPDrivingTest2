@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Timeline;
 
@@ -12,6 +13,8 @@ public class RaycastRoad : MonoBehaviour
     [SerializeField] private float threshold = 0.01f;
     [SerializeField] private int sweepDistance = 10;
     [SerializeField] private bool showGizmos = false;
+
+    [SerializeField] private TextMeshProUGUI uiElement;
     private Vector3 gizmoHitPoint = new Vector3();
 
     public float distanceFromEdge = 0;
@@ -40,12 +43,20 @@ public class RaycastRoad : MonoBehaviour
 
                 if (hitDownOpposite.collider.CompareTag("Terrain") && hitHypotenuse.collider.CompareTag("Terrain"))
                 {
+                    uiElement.text = "on terrain ";
 //                    print("on terrain");
+//                    GameManager.Instance.logToTextFileScenario("On Terrain");
                 }
                 else
                 {
                     float distanceZ = binarySearch();
                     distanceFromEdge = Mathf.Sqrt((distanceZ*distanceZ)-(hitDownOpposite.distance*hitDownOpposite.distance));
+                    if (distanceZ <= 0f)
+                    {
+                        print(gameObject.name + " I'm on the edge");
+                    }
+
+                    uiElement.text = distanceZ + " ";
                 }
             }
 
@@ -66,17 +77,26 @@ public class RaycastRoad : MonoBehaviour
             loopCounter++;
             RaycastHit hit;
             middle = (leftPointer + (tempVectorZ - leftPointer) / 2);
+
+            if(showGizmos){
+                Debug.Log(leftPointer + " " + middle + " " + tempVectorZ);
+            }
             if (Physics.Raycast(transform.position, transform.TransformDirection(0, -1, middle), out hit, sweepDistance))
             {
                 gizmoHitPoint = hit.point;
+                if (isEdge(middle))
+                {
+                    return middle;
+                }
                 if (hit.collider.transform.CompareTag("Road"))
                 {
-                    leftPointer = (float)(middle);
+                    leftPointer = (float)System.Math.Round(middle,4);
                 }
             
                 else if (hit.collider.transform.CompareTag("Terrain"))
                 {
-                    tempVectorZ = (float)(middle);
+//                    tempVectorZ = (float)(middle);
+                    tempVectorZ = (float)System.Math.Round(middle,4);
                 }
                 else
                 {
@@ -102,6 +122,8 @@ public class RaycastRoad : MonoBehaviour
         if(showGizmos)
         {
             Debug.DrawRay(transform.position, transform.transform.TransformDirection(0, -1, middle) * sweepDistance, Color.green);
+            Debug.Log("end: " + leftPointer + " " + middle + " " + tempVectorZ);
+            Debug.Log("is this the edge? " + isEdge(middle) + "---------------------------");
         }
         return middle;
     }
