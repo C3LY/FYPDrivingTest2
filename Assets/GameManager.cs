@@ -2,10 +2,12 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using Unity.Services.Analytics;
 using Unity.Services.Core;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
+using UnityEngine.UI;
 using Random = System.Random;
 
 
@@ -15,6 +17,10 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject startingLocationBridge;
     [SerializeField] private GameObject startingLocationMountain;
     [SerializeField] private GameObject playerAmbulance;
+    
+    [SerializeField] private GameObject FillFormText;
+    [SerializeField] private TextMeshProUGUI Code;
+    [SerializeField] private GameObject FillFormCloseButton;
     
     List<Tuple<GameObject, string>> shuffledScenarioList = new List<Tuple<GameObject, string>>();
     List<Tuple<GameObject, string>> scenarioList = new List<Tuple<GameObject, string>>();
@@ -78,6 +84,7 @@ public class GameManager : MonoBehaviour
     
     private void Start()
     {
+        Time.timeScale = 0;
         setUpScenario();
 
     }
@@ -106,9 +113,18 @@ public class GameManager : MonoBehaviour
         } 
     }
 
+    private void TextFill()
+    {
+        Time.timeScale = 0;
+        Code.text = shuffledScenarioList[currentScenario].Item2 + shuffledScenarioList[currentScenario].Item1.name;
+        FillFormText.SetActive(true);
+        Code.gameObject.SetActive(true);
+        FillFormCloseButton.SetActive(true);
+    }
+
     public void switchToNextScenario()
     {
-
+        TextFill();
         currentScenario++;
         if (currentScenario >= shuffledScenarioList.Count)
         {
@@ -119,7 +135,11 @@ public class GameManager : MonoBehaviour
         {
             setUpScenario(); 
         }
+    }
 
+    public void resumeTime()
+    {
+        Time.timeScale = 1;
     }
 
     private void Update()
