@@ -100,7 +100,7 @@ public class RaycastRoad : MonoBehaviour
                 }
                 else
                 {
-                    print("bail - no tag");
+//                    print("bail - no tag");
                     return Mathf.Infinity;
                 }
             }
@@ -134,12 +134,14 @@ public class RaycastRoad : MonoBehaviour
         RaycastHit hit;
         Physics.Raycast(transform.position, transform.TransformDirection(0,-1,vectorZToLookAt), out hit, sweepDistance);
         RaycastHit hitPlus;
-        Physics.Raycast(transform.position, transform.TransformDirection(0,-1,(float)(vectorZToLookAt +0.2)), out hitPlus, sweepDistance);
         if (hit.collider.transform.CompareTag("Road"))
         {
-            if(hitPlus.collider.transform.CompareTag("Terrain")){
-                print("this is  the  edge");
-                return true;
+            if(Physics.Raycast(transform.position, transform.TransformDirection(0,-1,(float)(vectorZToLookAt +0.2)), out hitPlus, sweepDistance)){
+                if (hitPlus.collider.transform.CompareTag("Terrain"))
+                {
+//                print("this is  the  edge");
+                    return true;
+                }
             }
         }
         //   print("the point looked at " + vectorZToLookAt + "is not the edge" + "hitCollider" + hit.collider.name);

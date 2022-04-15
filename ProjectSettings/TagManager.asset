@@ -9,6 +9,7 @@ TagManager:
   - Scenario
   - Vehicle
   - ScenarioList
+  - ColliderSection
   layers:
   - Default
   - TransparentFX

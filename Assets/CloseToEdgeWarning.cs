@@ -16,8 +16,8 @@ public class CloseToEdgeWarning : MonoBehaviour
     [SerializeField] private RaycastDummy _dummyRR;
 
     [SerializeField] private GameObject warningUI;
-    [SerializeField] private float distanceWarning = 0.01f;
-    private void Update()
+//    [SerializeField] private float distanceWarning = 0.01f;
+    private void FixedUpdate()
     {
 //        if (FL.distanceFromEdge <= distanceWarning||FR.distanceFromEdge <= distanceWarning||RL.distanceFromEdge <= distanceWarning||RR.distanceFromEdge <= distanceWarning)
 //        {

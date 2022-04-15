@@ -1,30 +1,32 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
-using Unity.Services.Analytics;
-using Unity.Services.Core;
 using UnityEngine;
-using UnityEngine.PlayerLoop;
-using UnityEngine.UI;
 using Random = System.Random;
 
 
 public class GameManager : MonoBehaviour
 {
-    private string filename;
+    public string filename;
+    public string fileText;
     [SerializeField] private GameObject startingLocationBridge;
     [SerializeField] private GameObject startingLocationMountain;
     [SerializeField] private GameObject playerAmbulance;
-    
+
+    [SerializeField] private TextMeshProUGUI ScenarioText;
     [SerializeField] private GameObject FillFormText;
     [SerializeField] private TextMeshProUGUI Code;
     [SerializeField] private GameObject FillFormCloseButton;
+    [SerializeField] private GameObject EndScreen;
     
     List<Tuple<GameObject, string>> shuffledScenarioList = new List<Tuple<GameObject, string>>();
     List<Tuple<GameObject, string>> scenarioList = new List<Tuple<GameObject, string>>();
     private List<string> scenarioName = new List<string>();
+
+    public int edgeCounterPerScenario;
+    public int terrainCounterPerScenario;
+    public string sectionNumber;
     public int currentScenario { get; set; }
 
     private static Random rng = new Random();
@@ -92,12 +94,15 @@ public class GameManager : MonoBehaviour
     private void setUpScenario()
     {
         logToTextFileScenario(" Next scenario:  " + currentScenario);
+        ScenarioText.SetText(shuffledScenarioList[currentScenario].Item2 + " - " + shuffledScenarioList[currentScenario].Item1.name);
         foreach (Tuple<GameObject, string> obj in scenarioList)
         {
             obj.Item1.SetActive(false);
         }
         
         shuffledScenarioList[currentScenario].Item1.SetActive(true);
+        edgeCounterPerScenario = 0;
+        terrainCounterPerScenario = 0;
 
         if (shuffledScenarioList[currentScenario].Item2 == scenarioName[0])
         {
@@ -112,24 +117,70 @@ public class GameManager : MonoBehaviour
             playerAmbulance.GetComponent<Rigidbody>().velocity = new Vector3(0,0,0);
         } 
     }
+    
+    private void setUpSpecificScenario(int scenarioNumber)
+    {
+        logToTextFileScenario("************ Specific scenario:  " + scenarioNumber);
+        ScenarioText.SetText(scenarioList[scenarioNumber].Item2 + " - " + scenarioList[scenarioNumber].Item1.name);
+        foreach (Tuple<GameObject, string> obj in scenarioList)
+        {
+            obj.Item1.SetActive(false);
+        }
+
+        if(scenarioNumber<scenarioList.Count){
+            scenarioList[scenarioNumber].Item1.SetActive(true);
+
+            if (scenarioList[scenarioNumber].Item2 == scenarioName[0])
+            {
+                playerAmbulance.transform.rotation = startingLocationMountain.transform.rotation;
+                playerAmbulance.transform.position = startingLocationMountain.transform.position;
+                playerAmbulance.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
+            }
+            else
+            {
+                playerAmbulance.transform.rotation = startingLocationBridge.transform.rotation;
+                playerAmbulance.transform.position =
+                    startingLocationBridge.transform
+                        .position; //TODO: if time, make generic instead of serializable fields
+                playerAmbulance.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
+            }
+        }
+    }
 
     private void TextFill()
     {
         Time.timeScale = 0;
-        Code.text = shuffledScenarioList[currentScenario].Item2 + shuffledScenarioList[currentScenario].Item1.name;
-        FillFormText.SetActive(true);
-        Code.gameObject.SetActive(true);
-        FillFormCloseButton.SetActive(true);
+        if (currentScenario<shuffledScenarioList.Count)
+        {
+            String scenario = shuffledScenarioList[currentScenario].Item2 + " - "  + shuffledScenarioList[currentScenario].Item1.name;
+            if (scenario.Contains("Control"))
+            {
+                Code.text = "Control scenario, no need to fill in form";
+            }
+            else
+            {
+                Code.text = scenario;
+            }
+            FillFormText.SetActive(true);
+            Code.gameObject.SetActive(true);
+            FillFormCloseButton.SetActive(true);
+        }
     }
 
     public void switchToNextScenario()
     {
         TextFill();
+        logToTextFileScenario("Counter Edge: " + edgeCounterPerScenario);
+        logToTextFile("Counter Terrain: " + terrainCounterPerScenario);
         currentScenario++;
         if (currentScenario >= shuffledScenarioList.Count)
         {
             print("Finished scenarios.");
-            Application.Quit();
+            foreach (Tuple<GameObject, string> obj in scenarioList)
+            {
+                obj.Item1.SetActive(false);
+            }
+            EndScreen.gameObject.SetActive(true);
         }
         else
         {
@@ -152,12 +203,62 @@ public class GameManager : MonoBehaviour
         {
             switchToNextScenario();
         }
+        
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            logToTextFileScenario("*****RESET****");
+            setUpScenario();
+        }
+        
+        if (Input.GetKeyDown(KeyCode.Alpha0))
+        {
+            setUpSpecificScenario(0);
+
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            setUpSpecificScenario(1);
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            setUpSpecificScenario(2);
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            setUpSpecificScenario(3);
+        }
+        //---------
+        else if (Input.GetKeyDown(KeyCode.Alpha4))
+        {
+            setUpSpecificScenario(4);
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha5))
+        {
+            setUpSpecificScenario(5);
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha6))
+        {
+            setUpSpecificScenario(6);
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha7))
+        {
+            setUpSpecificScenario(7);
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha8))
+        {
+            setUpSpecificScenario(8);
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha9))
+        {
+            setUpSpecificScenario(9);
+        }
     }
 
-    public void logToTextFile(string lineOfText)
+    private void logToTextFile(string lineOfText)
     {
         try {
-            System.IO.File.AppendAllText(filename, DateTime.Now + lineOfText + "\n");
+            System.IO.File.AppendAllText(filename, DateTime.Now + lineOfText + "\n"); //For downloaded projects
+            fileText += (DateTime.Now + lineOfText + "\n");
         }
         catch {
             print("could not append");
@@ -166,9 +267,11 @@ public class GameManager : MonoBehaviour
     
     public void logToTextFileScenario(string lineOfText)
     {
-        logToTextFile(
-                    "  " + shuffledScenarioList[currentScenario].Item2 + " | " +
-                    shuffledScenarioList[currentScenario].Item1.name + " | " + lineOfText);
+        if(currentScenario<shuffledScenarioList.Count){
+            logToTextFile(
+                "  " + shuffledScenarioList[currentScenario].Item2 + " | " +
+                shuffledScenarioList[currentScenario].Item1.name + " | " + lineOfText);
+        }
 
     }
     

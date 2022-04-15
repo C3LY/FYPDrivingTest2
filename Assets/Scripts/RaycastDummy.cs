@@ -30,10 +30,12 @@ public class RaycastDummy : MonoBehaviour
             if (hit.collider.CompareTag("Road") && hitOuter.collider.CompareTag("Terrain"))
             {
                 hittingEdge = true;
+                onTerrain = false;
             }
             if (hit.collider.CompareTag("Road") && hitOuter.collider.CompareTag("Road"))
             {
                 hittingEdge = false;
+                onTerrain = false;
             }
             if (hit.collider.CompareTag("Terrain") && hitOuter.collider.CompareTag("Terrain"))
             {

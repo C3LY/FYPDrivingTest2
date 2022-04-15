@@ -13,15 +13,20 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/Assets/CloseToEdgeWarning.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/ScenarioBreakTrigger.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/ArchHit.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/TextManager.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/WebGLFile.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/DimensionSquareMove.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/InSection.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/ChangeScenario.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/LogEdgeWarning.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/RaycastDummy.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/ArchHit.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/CarController.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/RaycastFront.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/DownloadButtonScript.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/GameManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/RaycastRoad.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/ChangeScenario.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/RaycastDummy.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/RaycastFront.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/HitLog.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/InstructionsScript.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/triggerActive.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
@@ -38,7 +43,6 @@
         <option value="$PROJECT_DIR$/Assets/RayCastRoad2.cs" />
         <option value="$PROJECT_DIR$/Assets/BoundsDistance.cs" />
         <option value="$PROJECT_DIR$/Assets/RaycastRoad.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/ChangeScenario.cs" />
         <option value="$PROJECT_DIR$/Assets/playBridgeAnimation.cs" />
         <option value="$PROJECT_DIR$/Assets/TransformClip.cs" />
         <option value="$PROJECT_DIR$/Assets/RaycastFront.cs" />
@@ -46,12 +50,20 @@
         <option value="$PROJECT_DIR$/Assets/HitLog.cs" />
         <option value="$PROJECT_DIR$/Assets/ArchHit.cs" />
         <option value="$PROJECT_DIR$/Assets/ScenarioBreakTrigger.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/RaycastRoad.cs" />
         <option value="$PROJECT_DIR$/Assets/RaycastDummy.cs" />
-        <option value="$PROJECT_DIR$/Assets/CloseToEdgeWarning.cs" />
         <option value="$PROJECT_DIR$/Assets/triggerActive.cs" />
         <option value="$PROJECT_DIR$/Assets/TextManager.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/WebGLFile.cs" />
+        <option value="$PROJECT_DIR$/Assets/InstructionsScript.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/ChangeScenario.cs" />
+        <option value="$PROJECT_DIR$/Assets/DownloadButtonScript.cs" />
+        <option value="$PROJECT_DIR$/Assets/CloseToEdgeWarning.cs" />
+        <option value="$PROJECT_DIR$/Assets/InSection.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/RaycastRoad.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/RaycastDummy.cs" />
+        <option value="$PROJECT_DIR$/Assets/LogEdgeWarning.cs" />
         <option value="$PROJECT_DIR$/Assets/GameManager.cs" />
+        <option value="$PROJECT_DIR$/Assets/DimensionSquareMove.cs" />
       </list>
     </option>
   </component>
@@ -116,7 +128,17 @@
       <workItem from="1649268168158" duration="4454000" />
       <workItem from="1649292896991" duration="8458000" />
       <workItem from="1649444181073" duration="3542000" />
-      <workItem from="1649938436402" duration="918000" />
+      <workItem from="1649938436402" duration="4025000" />
+      <workItem from="1649959906198" duration="823000" />
+      <workItem from="1649961224839" duration="2113000" />
+      <workItem from="1649963564300" duration="77000" />
+      <workItem from="1649963910734" duration="65000" />
+      <workItem from="1649964231301" duration="740000" />
+      <workItem from="1649965147215" duration="2926000" />
+      <workItem from="1649970213030" duration="329000" />
+      <workItem from="1649970782656" duration="213000" />
+      <workItem from="1649971021415" duration="3354000" />
+      <workItem from="1649976140319" duration="3336000" />
     </task>
     <servers />
   </component>
