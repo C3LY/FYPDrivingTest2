@@ -24,6 +24,7 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/CarController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/RaycastFront.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/DownloadButtonScript.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/ScenarioBreakTrigger.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/GameManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/RaycastRoad.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/InstructionsScript.cs" root0="FORCE_HIGHLIGHTING" />
@@ -62,8 +63,9 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/RaycastRoad.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/RaycastDummy.cs" />
         <option value="$PROJECT_DIR$/Assets/LogEdgeWarning.cs" />
-        <option value="$PROJECT_DIR$/Assets/GameManager.cs" />
         <option value="$PROJECT_DIR$/Assets/DimensionSquareMove.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/ScenarioBreakTrigger.cs" />
+        <option value="$PROJECT_DIR$/Assets/GameManager.cs" />
       </list>
     </option>
   </component>
@@ -138,7 +140,7 @@
       <workItem from="1649970213030" duration="329000" />
       <workItem from="1649970782656" duration="213000" />
       <workItem from="1649971021415" duration="3354000" />
-      <workItem from="1649976140319" duration="3336000" />
+      <workItem from="1649976140319" duration="7729000" />
     </task>
     <servers />
   </component>

@@ -7,7 +7,10 @@ public class ScenarioBreakTrigger : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {
-    GameManager.Instance.logToTextFileScenario("Reached Scenario Breaker --");
-        GameManager.Instance.switchToNextScenario();
+        if (other.CompareTag("Player") || other.CompareTag("Vehicle"))
+        {
+            GameManager.Instance.logToTextFileScenario("Reached Scenario Breaker --");
+            GameManager.Instance.switchToNextScenario();
+        }
     }
 }

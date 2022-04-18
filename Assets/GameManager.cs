@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
 {
     public string filename;
     public string fileText;
+    [SerializeField] private bool shuffledInScenarioOrder = true;
     [SerializeField] private GameObject startingLocationBridge;
     [SerializeField] private GameObject startingLocationMountain;
     [SerializeField] private GameObject playerAmbulance;
@@ -66,17 +67,29 @@ public class GameManager : MonoBehaviour
         _instance = this;
         setUpLogFile();
         logToTextFile("----" + "Start" + "----");
+        List<Tuple<GameObject, string>> shuffledInScenarioOrderList = new List<Tuple<GameObject, string>>();
         foreach (var obj in GameObject.FindGameObjectsWithTag("ScenarioList"))
         {
+            List<Tuple<GameObject, string>> tempForOrderList = new List<Tuple<GameObject, string>>();
             scenarioName.Add(obj.name);
 //            print("found objects in scenarioList" + obj.name);
             foreach (Transform child in obj.transform)
             {
                 scenarioList.Add(new Tuple<GameObject,string>(child.gameObject,obj.name));
+                tempForOrderList.Add(new Tuple<GameObject,string>(child.gameObject,obj.name));
             }
+            tempForOrderList = tempForOrderList.OrderBy(a => rng.Next()).ToList();
+            shuffledInScenarioOrderList.AddRange(tempForOrderList);
         }
         string fullList = " Shuffled list order : " ;
-        shuffledScenarioList = scenarioList.OrderBy(a => rng.Next()).ToList();
+        if (shuffledInScenarioOrder)
+        {
+            shuffledScenarioList = shuffledInScenarioOrderList;
+        }
+        else
+        {
+            shuffledScenarioList = scenarioList.OrderBy(a => rng.Next()).ToList();
+        }
         foreach( var x in shuffledScenarioList) {
             fullList += x.ToString() + " ";
         }
@@ -161,6 +174,18 @@ public class GameManager : MonoBehaviour
             {
                 Code.text = scenario;
             }
+
+            if (currentScenario+1 == shuffledScenarioList.Count)
+            {
+                Code.text += "  This is the last scenario, please return to the survey to complete the study";
+            }
+            else {
+                if (shuffledScenarioList[currentScenario + 1].Item2 != shuffledScenarioList[currentScenario].Item2)
+                {
+                    Code.text += "  This is the last of the " + shuffledScenarioList[currentScenario].Item2 +
+                                 " scenarios, please also fill in the priority question on the next page";
+                }
+            }
             FillFormText.SetActive(true);
             Code.gameObject.SetActive(true);
             FillFormCloseButton.SetActive(true);
@@ -201,6 +226,7 @@ public class GameManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.N))
         {
+            logToTextFileScenario("*****N Switch****");
             switchToNextScenario();
         }
         
@@ -212,44 +238,54 @@ public class GameManager : MonoBehaviour
         
         if (Input.GetKeyDown(KeyCode.Alpha0))
         {
+            logToTextFileScenario("*****" + KeyCode.Alpha0 + " pressed ***");
             setUpSpecificScenario(0);
 
         }
         else if (Input.GetKeyDown(KeyCode.Alpha1))
         {
+            logToTextFileScenario("*****" + KeyCode.Alpha1 + " pressed ***");
             setUpSpecificScenario(1);
         }
         else if (Input.GetKeyDown(KeyCode.Alpha2))
         {
+            logToTextFileScenario("*****" + KeyCode.Alpha2 + " pressed ***");
             setUpSpecificScenario(2);
         }
         else if (Input.GetKeyDown(KeyCode.Alpha3))
         {
+            logToTextFileScenario("*****" + KeyCode.Alpha3 + " pressed ***");
             setUpSpecificScenario(3);
         }
         //---------
         else if (Input.GetKeyDown(KeyCode.Alpha4))
         {
+            logToTextFileScenario("*****" + KeyCode.Alpha4 + " pressed ***");
             setUpSpecificScenario(4);
         }
         else if (Input.GetKeyDown(KeyCode.Alpha5))
         {
+            logToTextFileScenario("*****" + KeyCode.Alpha5 + " pressed ***");
             setUpSpecificScenario(5);
         }
         else if (Input.GetKeyDown(KeyCode.Alpha6))
         {
+            logToTextFileScenario("*****" + KeyCode.Alpha6 + " pressed ***");
             setUpSpecificScenario(6);
         }
         else if (Input.GetKeyDown(KeyCode.Alpha7))
         {
+            logToTextFileScenario("*****" + KeyCode.Alpha7 + " pressed ***");
             setUpSpecificScenario(7);
         }
         else if (Input.GetKeyDown(KeyCode.Alpha8))
         {
+            logToTextFileScenario("*****" + KeyCode.Alpha8 + " pressed ***");
             setUpSpecificScenario(8);
         }
         else if (Input.GetKeyDown(KeyCode.Alpha9))
         {
+            logToTextFileScenario("*****" + KeyCode.Alpha9 + " pressed ***");
             setUpSpecificScenario(9);
         }
     }
