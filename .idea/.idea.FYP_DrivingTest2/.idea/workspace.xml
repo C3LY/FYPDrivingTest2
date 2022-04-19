@@ -55,7 +55,6 @@
         <option value="$PROJECT_DIR$/Assets/triggerActive.cs" />
         <option value="$PROJECT_DIR$/Assets/TextManager.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/WebGLFile.cs" />
-        <option value="$PROJECT_DIR$/Assets/InstructionsScript.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/ChangeScenario.cs" />
         <option value="$PROJECT_DIR$/Assets/DownloadButtonScript.cs" />
         <option value="$PROJECT_DIR$/Assets/CloseToEdgeWarning.cs" />
@@ -66,6 +65,7 @@
         <option value="$PROJECT_DIR$/Assets/DimensionSquareMove.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/ScenarioBreakTrigger.cs" />
         <option value="$PROJECT_DIR$/Assets/GameManager.cs" />
+        <option value="$PROJECT_DIR$/Assets/InstructionsScript.cs" />
       </list>
     </option>
   </component>
@@ -140,7 +140,9 @@
       <workItem from="1649970213030" duration="329000" />
       <workItem from="1649970782656" duration="213000" />
       <workItem from="1649971021415" duration="3354000" />
-      <workItem from="1649976140319" duration="7729000" />
+      <workItem from="1649976140319" duration="8213000" />
+      <workItem from="1650402483388" duration="37000" />
+      <workItem from="1650402538347" duration="508000" />
     </task>
     <servers />
   </component>
