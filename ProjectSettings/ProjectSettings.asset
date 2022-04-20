@@ -689,7 +689,13 @@ PlayerSettings:
   activeInputHandler: 0
   cloudProjectId: cd93a9cc-62f9-4093-bc5f-b2652976de5e
   framebufferDepthMemorylessMode: 0
-  qualitySettingsNames: []
+  qualitySettingsNames:
+  - Very Low
+  - Low
+  - Medium
+  - High
+  - Very High
+  - Ultra
   projectName: FYP_DrivingTest2
   organizationId: chloeleeyuen
   cloudEnabled: 0

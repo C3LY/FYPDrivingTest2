@@ -12,15 +12,21 @@ public class LogEdgeWarning : MonoBehaviour
     [SerializeField] private RaycastDummy _dummyRR;
 
     private bool alreadyOnTerrain;
+    private bool alreadyCloseToEdge;
     private void FixedUpdate()
     {
 //print(alreadyOnTerrain + "FL " + _dummyFL.onTerrain + " FR" + _dummyFR.onTerrain + " RL" + _dummyRL.onTerrain + " RR" + _dummyRR.onTerrain);
         if(!GameManager.Instance.sectionNumber.Contains("Start")){
             if (_dummyFL.hittingEdge || _dummyFR.hittingEdge || _dummyRL.hittingEdge || _dummyRR.hittingEdge)
             {
-                GameManager.Instance.logToTextFileScenario("Close to edge > " + GameManager.Instance.sectionNumber);
-                GameManager.Instance.edgeCounterPerScenario++;
+                if(!alreadyCloseToEdge){
+                    GameManager.Instance.logToTextFileScenario("Close to edge > " + GameManager.Instance.sectionNumber);
+                    GameManager.Instance.edgeCounterPerScenario++;
+                    alreadyCloseToEdge = true;
+                }
             }
+
+            alreadyCloseToEdge = false;
 
             if (_dummyFL.onTerrain || _dummyFR.onTerrain || _dummyRL.onTerrain || _dummyRR.onTerrain)
             {

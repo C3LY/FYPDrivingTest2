@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
 {
     public string filename;
     public string fileText;
+    private bool specificScenario = false;
     [SerializeField] private bool shuffledInScenarioOrder = true;
     [SerializeField] private GameObject startingLocationBridge;
     [SerializeField] private GameObject startingLocationMountain;
@@ -19,6 +20,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject FillFormText;
     [SerializeField] private TextMeshProUGUI Code;
     [SerializeField] private GameObject FillFormCloseButton;
+    [SerializeField] private GameObject CloseButtonWarning;
     [SerializeField] private GameObject EndScreen;
     
     List<Tuple<GameObject, string>> shuffledScenarioList = new List<Tuple<GameObject, string>>();
@@ -106,6 +108,7 @@ public class GameManager : MonoBehaviour
 
     private void setUpScenario()
     {
+        specificScenario = false;
         logToTextFileScenario(" Next scenario:  " + currentScenario);
         ScenarioText.SetText(shuffledScenarioList[currentScenario].Item2 + " - " + shuffledScenarioList[currentScenario].Item1.name);
         foreach (Tuple<GameObject, string> obj in scenarioList)
@@ -133,6 +136,7 @@ public class GameManager : MonoBehaviour
     
     private void setUpSpecificScenario(int scenarioNumber)
     {
+        specificScenario = true;
         logToTextFileScenario("************ Specific scenario:  " + scenarioNumber);
         ScenarioText.SetText(scenarioList[scenarioNumber].Item2 + " - " + scenarioList[scenarioNumber].Item1.name);
         foreach (Tuple<GameObject, string> obj in scenarioList)
@@ -162,33 +166,38 @@ public class GameManager : MonoBehaviour
 
     private void TextFill()
     {
-        Time.timeScale = 0;
-        if (currentScenario<shuffledScenarioList.Count)
-        {
-            String scenario = shuffledScenarioList[currentScenario].Item2 + " - "  + shuffledScenarioList[currentScenario].Item1.name;
-            if (scenario.Contains("Control"))
+        if(!specificScenario){
+            Time.timeScale = 0;
+            if (currentScenario < shuffledScenarioList.Count)
             {
-                Code.text = "Control scenario, no need to fill in form";
-            }
-            else
-            {
-                Code.text = scenario;
-            }
-
-            if (currentScenario+1 == shuffledScenarioList.Count)
-            {
-                Code.text += "  This is the last scenario, please return to the survey to complete the study";
-            }
-            else {
-                if (shuffledScenarioList[currentScenario + 1].Item2 != shuffledScenarioList[currentScenario].Item2)
+                String scenario = shuffledScenarioList[currentScenario].Item2 + " - " +
+                                  shuffledScenarioList[currentScenario].Item1.name;
+                if (scenario.Contains("Control"))
                 {
-                    Code.text += "  This is the last of the " + shuffledScenarioList[currentScenario].Item2 +
-                                 " scenarios, please also fill in the priority question on the next page";
+                    Code.text = "This was a control scenario, no need to fill in form";
                 }
+                else
+                {
+                    Code.text = scenario;
+                }
+
+                if (currentScenario + 1 == shuffledScenarioList.Count)
+                {
+                    Code.text += "  This is the last scenario, please return to the survey to complete the study";
+                }
+                else
+                {
+                    if (shuffledScenarioList[currentScenario + 1].Item2 != shuffledScenarioList[currentScenario].Item2)
+                    {
+                        Code.text += "  This is the last of the " + shuffledScenarioList[currentScenario].Item2 +
+                                     " scenarios, please also fill in the priority question on the next page";
+                    }
+                }
+
+                FillFormText.SetActive(true);
+                Code.gameObject.SetActive(true);
+                FillFormCloseButton.SetActive(true);
             }
-            FillFormText.SetActive(true);
-            Code.gameObject.SetActive(true);
-            FillFormCloseButton.SetActive(true);
         }
     }
 
@@ -197,7 +206,11 @@ public class GameManager : MonoBehaviour
         TextFill();
         logToTextFileScenario("Counter Edge: " + edgeCounterPerScenario);
         logToTextFile("Counter Terrain: " + terrainCounterPerScenario);
-        currentScenario++;
+        if (!specificScenario)
+        {
+            currentScenario++;
+        }
+
         if (currentScenario >= shuffledScenarioList.Count)
         {
             print("Finished scenarios.");
@@ -226,8 +239,35 @@ public class GameManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.N))
         {
-            logToTextFileScenario("*****N Switch****");
-            switchToNextScenario();
+            if (!FillFormText.activeInHierarchy)
+            {
+                if(!specificScenario){
+                    print("section number is " + sectionNumber);
+                    if (sectionNumber.Contains("Start") ||
+                        shuffledScenarioList[currentScenario].Item1.name.Contains("Control"))
+                    {
+                        Code.text = ("Please continue further in the " +
+                                     shuffledScenarioList[currentScenario].Item1.name +
+                                     " scenario.");
+                        Code.gameObject.SetActive(true);
+                        CloseButtonWarning.SetActive(true);
+                        Time.timeScale = 0;
+                    }
+                    else
+                    {
+                        logToTextFileScenario("*****N Switch****");
+                        switchToNextScenario();
+                    }
+                }
+                else
+                {
+                    Code.text = ("Press R to return to ordered scenarios");
+                    Code.gameObject.SetActive(true);
+                    CloseButtonWarning.SetActive(true);
+                    Time.timeScale = 0;
+                }
+            }
+            
         }
         
         if (Input.GetKeyDown(KeyCode.R))

@@ -7,6 +7,12 @@ public class triggerActive : MonoBehaviour
 {
     [SerializeField] private GameObject obj;
     // Start is called before the first frame update
+
+    private void Start()
+    {
+        obj.SetActive(false);
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         print("trigger enter");

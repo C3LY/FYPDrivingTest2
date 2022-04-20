@@ -18,6 +18,7 @@
     <setting file="file://$PROJECT_DIR$/Assets/DimensionSquareMove.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/InSection.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/ChangeScenario.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/BufferSignActivity.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/LogEdgeWarning.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/RaycastDummy.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/ArchHit.cs" root0="FORCE_HIGHLIGHTING" />
@@ -52,7 +53,6 @@
         <option value="$PROJECT_DIR$/Assets/ArchHit.cs" />
         <option value="$PROJECT_DIR$/Assets/ScenarioBreakTrigger.cs" />
         <option value="$PROJECT_DIR$/Assets/RaycastDummy.cs" />
-        <option value="$PROJECT_DIR$/Assets/triggerActive.cs" />
         <option value="$PROJECT_DIR$/Assets/TextManager.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/WebGLFile.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/ChangeScenario.cs" />
@@ -61,11 +61,13 @@
         <option value="$PROJECT_DIR$/Assets/InSection.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/RaycastRoad.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/RaycastDummy.cs" />
-        <option value="$PROJECT_DIR$/Assets/LogEdgeWarning.cs" />
         <option value="$PROJECT_DIR$/Assets/DimensionSquareMove.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/ScenarioBreakTrigger.cs" />
-        <option value="$PROJECT_DIR$/Assets/GameManager.cs" />
         <option value="$PROJECT_DIR$/Assets/InstructionsScript.cs" />
+        <option value="$PROJECT_DIR$/Assets/LogEdgeWarning.cs" />
+        <option value="$PROJECT_DIR$/Assets/triggerActive.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/ScenarioBreakTrigger.cs" />
+        <option value="$PROJECT_DIR$/Assets/BufferSignActivity.cs" />
+        <option value="$PROJECT_DIR$/Assets/GameManager.cs" />
       </list>
     </option>
   </component>
@@ -106,6 +108,9 @@
       <method v="2" />
     </configuration>
   </component>
+  <component name="ServiceViewManager">
+    <option name="showServicesTree" value="false" />
+  </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -142,7 +147,11 @@
       <workItem from="1649971021415" duration="3354000" />
       <workItem from="1649976140319" duration="8213000" />
       <workItem from="1650402483388" duration="37000" />
-      <workItem from="1650402538347" duration="508000" />
+      <workItem from="1650402538347" duration="2509000" />
+      <workItem from="1650413633994" duration="106000" />
+      <workItem from="1650414401900" duration="99000" />
+      <workItem from="1650414607421" duration="328000" />
+      <workItem from="1650415399724" duration="1260000" />
     </task>
     <servers />
   </component>
